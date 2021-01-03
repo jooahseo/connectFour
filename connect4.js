@@ -38,13 +38,23 @@ function makeHtmlBoard() {
   // create table data of row and give them id = index & apeend to row and htmlBoard
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
+  // top.addEventListener("hover",function(){
+  //   top.style.backgroundColor = currPlayer === 1 ? 'red':'blue';
+  // })
   top.addEventListener("click", handleClick);
 
   for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
+    headCell.addEventListener("mouseover",function(){
+      headCell.style.backgroundColor = currPlayer === 1 ? 'red':'blue';
+    });
+    headCell.addEventListener("mouseout",function(){
+      headCell.style.backgroundColor = "white";
+    });
     top.append(headCell);
   }
+  
   htmlBoard.append(top);
 
   // TODO: add comment for this code
@@ -91,7 +101,31 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
-  alert(`${msg}`);
+  const newDiv = document.createElement('div');
+  const msgBoard = document.querySelector('#message');
+  const btn = document.createElement('button');
+  btn.innerText ="Restart";
+  btn.addEventListener('click',restart);
+  newDiv.innerText = msg;
+  newDiv.append(btn);
+  msgBoard.append(newDiv);
+  disableBoard();
+}
+
+function disableBoard(){
+  const top = document.querySelector("#column-top");
+  top.removeEventListener("click", handleClick);
+}
+function restart(){
+  currPlayer = 1;
+  board.splice(0, board.length);
+  const htmlBoard = document.querySelector('#board');
+  htmlBoard.innerHTML ="";
+
+  const msgBoard = document.querySelector('#message');
+  msgBoard.innerHTML ="";
+  makeBoard();  
+  makeHtmlBoard();
 }
 
 /** handleClick: handle click of column top to play piece */

@@ -1,4 +1,12 @@
 /* game board table */
+#game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
 
 #board td {
   width: 50px;
@@ -26,9 +34,20 @@
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+  border: dashed 1.5px lightgray;
+  border-radius: 50%;
+  background-color: white;
 }
 
 #column-top td:hover {
   background-color: gold;
+}
+#message{
+  font-size:x-large;
+  margin-top: 2%;
+  
+}
+button{
+  margin-left: 10px;
+  font-size: 16px;
 }
